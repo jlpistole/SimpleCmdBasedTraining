@@ -239,3 +239,5 @@ Enable the robot on the Driver Station. On Smart Dashboard, you should see this:
 
 Press the R2 and L2 buttons on your controller separately and observe how the Motor Spin Direction on the Dashboard changes. (Note that your code does not consider the case where both buttons are pressed at the same time.)
 
+[Part 2: Adding a real motor](SingleMotorSubsystem2.md)
+SingleMotorSubsystem2.md
