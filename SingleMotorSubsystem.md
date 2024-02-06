@@ -137,7 +137,7 @@ You will pass in lambda expressions for the arguments run and end. The run expre
 
 ```
 public Command spinIn() {
-  return this.runEnd(() -> { this._spinMotor(SpinDirection.SpinInDir);},
+  return this.runEnd(() -> { this.spinMotor(SpinDirection.SpinInDir);},
     () -> { this._stopMotor();});
 }
 ```
@@ -148,7 +148,60 @@ Note: Don't forget to include the semicolons at the end of the line of code insi
 
 6. Repeat Step 5 for the spin *out* direction.
 
+## Add the new subsystem to the robot container
+
+Open the RobotContainer.java file. Import the new subsystem at the top of the file (add *import frc.robot.subsystems.SingleMotorSubsystem;*). In the class, create a new *private final* member variable for the subsystem and make a new instance of the subsystem.
+
+<details>
+  <summary>How-to: New subsystem member variable code</summary>
+
+  ```
+  private final SingleMotorSubsystem m_singleMotorSubsystem = new SingleMotorSubsystem();
+  ```
+</details>
+
 ## Creating command triggers on the controller
+
+Open the RobotContainer.java file.
+
+In order for these commands to be scheduled and run, you will need to create bindings to map their execution to buttons on the controller. In this example, you will use a Playstation controller. The template code you started with assumes an Xbox controller, so before proceeding further, go to the top of RobotContainer and find the m_driverController class field.  Change the type of the field and the constructor from CommandXboxController to CommandPS4Controller. You will still see one compiler error after making this change.
+
+<details>
+  <summary>How-to: Modified Code</summary>
+
+```
+private final CommandPS4Controller m_driverController =
+      new CommandPS4Controller(OperatorConstants.kDriverControllerPort);
+```
+
+</details>
+
+Next, find the method *configureBindings*. The existing code in this method interacts with the example subsystem provided by the template. You will see a compiler error here that was caused by changing the controller from Xbox to Playstation. You can delete all the existing code in this method.
+
+Replace the existing code with bindings such that the R2 button causes the motor to spin in the inward direction when held down and the L2 button causes the motor to spin in the outer direction while held down. Take a look at the javadoc for [CommandPS4Controller](https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj2/command/button/CommandPS4Controller.html) and [Trigger](https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj2/command/button/Trigger.html) to get started. Note that while L2 and R2 can provide values indicating how far they are pressed down, for this application we only care if the value is on or off/true or false.
+
+<details>
+  <summary>How-to: Using Trigger</summary>
+
+  The controller class provides methods that let you retrieve a Trigger for a controller button you want to bind to. For example, you can retrieve a Trigger object for the R2 button using the following:
+
+  ```
+  m_driverController.R2()
+  ```
+
+  Using the trigger, you can bind commands to be executed using various different semantics. In this case, you want a command that will run as long as the button is held down (value is true), and stop when it is no longer held down.
+</details>
+
+<details>
+  <summary> How-to: Implementation</summary>
+
+  ```
+private void configureBindings() {
+    m_driverController.R2().whileTrue(m_singleMotorSubsystem.spinIn());
+    m_driverController.L2().whileTrue(m_singleMotorSubsystem.spinOut());
+}
+```
+</details>
 
 ## Instrumenting the code to see current motor direction
 
