@@ -222,3 +222,20 @@ The [SmartDashboard](https://github.wpilib.org/allwpilib/docs/release/java/edu/w
 </details>
 
 ## Running in the simulator
+
+To test the code you will run it in the simulator with the DriverStation and a dashboard. This example will use SmartDashboard.
+
+In your Command Palette, enter *WPILib: Simulate Robot Code*. This will first build your code. Resolve any remaining errors you have before continuing.
+
+Once the code builds sucessfully, you will see a pop-up window:
+
+![image](https://github.com/jlpistole/SimpleCmdBasedTraining/assets/88595898/54b2cdbb-960d-465f-8316-b2ad607ac584)
+
+Make sure both Sim GUI and Use Real Driver Station are checked and click OK. You may see a junit dependency error in the lower right of your screen - you can ignore this and click Continue. If you are not already running your Driver Station and Smart Dashboard tools you will want to run them at this point. Also make sure you have the PS4 controller plugged in to your computer.
+
+Enable the robot on the Driver Station. On Smart Dashboard, you should see this:
+
+![image](https://github.com/jlpistole/SimpleCmdBasedTraining/assets/88595898/981643d1-8821-477c-ac49-114b79a89da4)
+
+Press the R2 and L2 buttons on your controller separately and observe how the Motor Spin Direction on the Dashboard changes. (Note that your code does not consider the case where both buttons are pressed at the same time.)
+
