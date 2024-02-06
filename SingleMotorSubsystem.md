@@ -205,4 +205,20 @@ private void configureBindings() {
 
 ## Instrumenting the code to see current motor direction
 
+In this section you will add Dashboard logging to your code. To do this, you will post values to the Dashboard in the periodic() method of SingleMotorSubsystem. The periodic() method is called regularly by the command scheduler and is a good place to do the housekeeping of updating values on the Dashboard to ensure they are current.
+
+The [SmartDashboard](https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj/smartdashboard/SmartDashboard.html) class provides static methods that can be used to put data on the dashboard. The put methods that you will use take two arguments: a key identifying what field on the dashboard to update; and a value identifying what value to put there. Using these SmartDashboard methods, add code to the periodic() method to update a field displaying the current spin state of the motor in SingleMotorSubsystem.
+
+<details>
+  <summary>How-to: An example implementation</summary>
+
+  ```
+   @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
+        SmartDashboard.putString("Motor Spin Direction", currentDirection.toString());
+    }
+  ```
+</details>
+
 ## Running in the simulator
