@@ -51,12 +51,18 @@ Enter SingleMotorSubsystem.java in the dialog box.
 Now you will create the commands that make this systme do things. In this case, you need commands to spin the motor forward, to spin the motor backward, and to stop the motor. For this section, you will not create any actual hardware interactions; instead your commands will set an internal state value indicating the direction of the motor.
 
 1. Every device on the robot's CAN bus needs to be identified uniquely, so each device needs a CAN ID. Create a constant in your subsystem class to specify the ID for this motor. For this example, use ID = 1
-2. For this example you will use motor speed as a percentage of the maximum speed of the motor. Create a constant for the absolute value to be used for this motor's speed when spinning. For this example, use 0.75.
+2. For this example you will use motor speed as a percentage of the maximum speed of the motor. Create a constant for the absolute value to be used for this motor's speed when spinning. For this example, use 0.50.
 
 <details>
   <summary>How-to: constant definitions in code</summary>
 
-  ![image](https://github.com/jlpistole/SimpleCmdBasedTraining/assets/88595898/771714e3-5123-48c1-86d5-e727c553f1fd)
+  ```
+public class SingleMotorSubsystem extends SubsystemBase {
+    
+    // Subsystem Constants
+    public static final int MOTOR_ID = 1;   
+    public static final double MOTOR_SPEED = 0.50;
+```
 
 </details>
 
