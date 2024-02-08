@@ -81,3 +81,7 @@ Update SingleMotorSubsystem's periodic method to post the motor's current speed 
 </details>
 
 ## Deploy and test on test board
+
+Ensure you have a motor with the desired motor ID in the CAN chain on the test board. If you want to use a motor with a different CAN ID, just change the value of MOTOR_ID in SingleMotorSubsystem.java. Power on the test board, connect to the test board Wifi, and deploy your code using the directions found [here](https://docs.wpilib.org/en/stable/docs/software/vscode-overview/deploying-robot-code.html).
+
+While running the FRC Driver Station and the SmartDashboard, enable the robot and verify the behavior using controller 0.
