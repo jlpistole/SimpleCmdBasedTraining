@@ -1,6 +1,6 @@
-# Single Motor Subsystem Exercise
+# Single Motor Subsystem Exercise: Part 1
 
-In this exercise you will create a command-based robot with a subsystem that controls a single motor with spin forward and spin backward commands.
+In this exercise you will create a command-based robot with a subsystem that controls a single motor with spin forward and spin backward commands. In part one of the exercise you will write all the code except the portion that directly interacts with the motor. Continue to [part 2](SingleMotorSubsystem.md) to complete the exercise.
 
 ## Setup 
 In VSCode, create a new WPILib project from the CommandRobot template:
