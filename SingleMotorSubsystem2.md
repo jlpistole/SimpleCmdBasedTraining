@@ -36,10 +36,28 @@ Update SingleMotorSubsystem's spinMotor and stopMotor methods to set the motor s
   ```
     private void stopMotor() {
         this.currentDirection = SpinDirection.SpinNone;
-        this.motor.stopMotor();
+        this.motor.stopMotor()
     }
   ```
 </details>
+
+To spin the motor using the TalonFX API, you will use the setControl method. This method allows the motor output to be set using multiple different control modes. For this application you will use Duty Cycle control, which sets the motor output using values between -1.0 and 1.0.
+
+Create a [DutyCycleOut](https://api.ctr-electronics.com/phoenix6/release/java/com/ctre/phoenix6/controls/DutyCycleOut.html) member variable in your SingleMotorSubsystem class and set it to new DutyCycleOut(0.0) in your constructor. You will use this member variable each time you set the motor speed.
+
+<details>
+  <summary>How-to: Example Code</summary>
+  ```
+  private DutyCycleOut dutyCycleOut;
+
+    public SingleMotorSubsystem() {
+        motor = new TalonFX(MOTOR_ID);
+        dutyCycleOut = new DutyCycleOut(0.0);
+    }
+    ```
+</details>
+
+Use the [withOutput](https://api.ctr-electronics.com/phoenix6/release/java/com/ctre/phoenix6/controls/DutyCycleOut.html#withOutput(double)) method on dutyCycleOut to indicate the desired output speed for the motor and the [setControl](https://api.ctr-electronics.com/phoenix6/release/java/com/ctre/phoenix6/hardware/core/CoreTalonFX.html#setControl(com.ctre.phoenix6.controls.DutyCycleOut)) method on motor to set the motor's speed.
 
 <details>
   <summary>How-to: Spin Motor implementation</summary>
@@ -52,11 +70,11 @@ Update SingleMotorSubsystem's spinMotor and stopMotor methods to set the motor s
                 break;
             case SpinInDir:
                 this.currentDirection = SpinDirection.SpinInDir;
-                this.motor.set(MOTOR_SPEED);
+                this.motor.setControl(dutyCycleOut.withOutput(MOTOR_SPEED));
                 break;
             case SpinOutDir:
                 currentDirection = SpinDirection.SpinOutDir;
-                this.motor.set(-1.0*MOTOR_SPEED);
+                this.motor.setControl(dutyCycleOut.withOutput(-1.0*MOTOR_SPEED));
                 break;
         }
     }
